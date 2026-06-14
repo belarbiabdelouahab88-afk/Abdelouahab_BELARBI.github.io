@@ -1,0 +1,1006 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Abdelouahab BELARBI — Robotique, Automatique & Mécatronique</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --navy:       #1a3255;
+      --navy-dark:  #0f1f36;
+      --navy-mid:   #243d66;
+      --blue:       #2e6db4;
+      --blue-light: #4a8fd4;
+      --text:       #e8eef6;
+      --muted:      #8fa8c8;
+      --border:     #2a4570;
+      --mono:       'Space Mono', monospace;
+      --sans:       'Inter', sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--navy-dark);
+      color: var(--text);
+      font-family: var(--sans);
+      font-size: 16px;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 2.5rem; height: 58px;
+      background: rgba(15,31,54,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      font-family: var(--mono); font-size: .88rem;
+      color: var(--blue-light); letter-spacing: .08em; text-decoration: none;
+    }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      font-size: .8rem; font-family: var(--mono);
+      color: var(--muted); text-decoration: none;
+      letter-spacing: .06em; transition: color .2s;
+    }
+    .nav-links a:hover { color: var(--blue-light); }
+    .nav-cv {
+      font-family: var(--mono); font-size: .8rem;
+      color: var(--blue-light); border: 1px solid var(--blue);
+      padding: .35rem .9rem; border-radius: 4px;
+      text-decoration: none; transition: background .2s, color .2s;
+    }
+    .nav-cv:hover { background: var(--blue); color: white; }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      display: flex; flex-direction: column; justify-content: center;
+      padding: 5rem 2.5rem 3rem;
+      max-width: 1100px; margin: 0 auto;
+      position: relative;
+    }
+    .hero-eyebrow {
+      font-family: var(--mono); font-size: .75rem;
+      color: var(--blue-light); letter-spacing: .18em;
+      text-transform: uppercase; margin-bottom: 1.2rem;
+    }
+    .hero-name {
+      font-size: clamp(2.6rem, 6vw, 5rem);
+      font-weight: 700; line-height: 1.05;
+      letter-spacing: -.02em; margin-bottom: .5rem;
+    }
+    .hero-name em { font-style: normal; color: var(--blue-light); }
+    .hero-sub {
+      font-size: clamp(.95rem, 1.8vw, 1.15rem);
+      color: var(--muted); font-weight: 300;
+      max-width: 540px; margin-bottom: 1.8rem;
+    }
+    .hero-meta {
+      display: flex; gap: 2rem; flex-wrap: wrap;
+      font-family: var(--mono); font-size: .75rem;
+      color: var(--muted); margin-bottom: 2.2rem;
+    }
+    .hero-meta span::before { content: '▸ '; color: var(--blue-light); }
+    .hero-ctas { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn-primary {
+      background: var(--blue); color: white;
+      font-family: var(--mono); font-size: .8rem; font-weight: 700;
+      padding: .7rem 1.5rem; border-radius: 4px;
+      text-decoration: none; transition: background .2s;
+    }
+    .btn-primary:hover { background: var(--blue-light); }
+    .btn-secondary {
+      border: 1px solid var(--border); color: var(--text);
+      font-family: var(--mono); font-size: .8rem;
+      padding: .7rem 1.5rem; border-radius: 4px;
+      text-decoration: none; transition: border-color .2s, color .2s;
+    }
+    .btn-secondary:hover { border-color: var(--blue-light); color: var(--blue-light); }
+    .scope {
+      position: absolute; right: -20px; top: 50%; transform: translateY(-50%);
+      width: 320px; opacity: .12; pointer-events: none;
+    }
+    @media (max-width: 768px) { .scope { display: none; } }
+
+    .hero-photo {
+  position: absolute;
+  right: 4rem;
+  top: 40%;
+  transform: translateY(-50%);
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;           /* makes it circular */
+  object-fit: cover;            /* crops the image to fill the circle */
+  object-position: center top;  /* shows the top of the image — good for portraits */
+  border: 3px solid var(--blue);
+  box-shadow: 0 0 40px rgba(46,109,180,0.3);
+}
+
+@media (max-width: 768px) {
+  .hero-photo { display: none; }  /* hides on mobile so it doesn't overlap text */
+}
+
+
+
+    /* ── SECTION BASE ── */
+    section {
+      max-width: 1100px; margin: 0 auto;
+      padding: 5.5rem 2.5rem;
+      border-top: 1px solid var(--border);
+    }
+    .section-label {
+      font-family: var(--mono); font-size: 1rem;
+      letter-spacing: .18em; text-transform: uppercase;
+      color: var(--blue-light); margin-bottom: .8rem;
+    }
+    .section-title {
+      font-size: clamp(1.5rem, 3vw, 2.2rem);
+      font-weight: 700; letter-spacing: -.02em; margin-bottom: 2.8rem;
+    }
+
+    /* ── SKILLS ── */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+      gap: 1.4rem;
+    }
+    .skill-group h3 {
+      font-family: var(--mono); font-size: .7rem;
+      letter-spacing: .1em; text-transform: uppercase;
+      color: var(--muted); margin-bottom: .7rem;
+      padding-bottom: .4rem; border-bottom: 1px solid var(--border);
+    }
+    .tags { display: flex; flex-wrap: wrap; gap: .45rem; }
+    .tag {
+      font-family: var(--mono); font-size: .72rem;
+      padding: .28rem .65rem; border-radius: 3px;
+      background: var(--navy-mid); border: 1px solid var(--border);
+      color: var(--text); transition: border-color .2s, color .2s;
+    }
+    .tag:hover { border-color: var(--blue-light); color: var(--blue-light); }
+
+    /* ══════════════════════════════════════════
+       PROJECT CARD
+       Full-width card with a background image
+       that sits behind the text content.
+       Alternates: text-left / text-right
+    ══════════════════════════════════════════ */
+    .project-card {
+      position: relative;
+      border-radius: 14px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      margin-bottom: 2.5rem;
+      min-height: 460px;
+      display: flex;
+      align-items: stretch;
+      transition: border-color .3s;
+    }
+    .project-card:hover { border-color: var(--blue); }
+
+    /* The background image — covers the whole card */
+    .project-bg {
+      position: absolute;
+      inset: 0;                      /* top:0 right:0 bottom:0 left:0 */
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      transition: transform .6s ease;
+      /* Replaced by inline style: background-image: url(...) */
+    }
+    .project-card:hover .project-bg { transform: scale(1.04); }
+
+    /* Dark gradient overlay so text stays readable over any image */
+    /* Odd cards: gradient goes left (dark) → right (transparent) */
+    .project-card:nth-child(odd) .project-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(
+        to right,
+        rgba(9,18,33,0.97) 0%,
+        rgba(9,18,33,0.85) 40%,
+        rgba(9,18,33,0.25) 70%,
+        rgba(9,18,33,0.05) 100%
+      );
+    }
+    /* Even cards: gradient goes right (dark) → left (transparent) */
+    .project-card:nth-child(even) .project-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(
+        to left,
+        rgba(9,18,33,0.97) 0%,
+        rgba(9,18,33,0.85) 40%,
+        rgba(9,18,33,0.25) 70%,
+        rgba(9,18,33,0.05) 100%
+      );
+    }
+
+    /* The text content block — sits on top of overlay */
+    .project-content {
+      position: relative;           /* above the overlay */
+      z-index: 1;
+      padding: 3rem 3.2rem;
+      max-width: 520px;             /* keep text from spreading across full width */
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: .7rem;
+    }
+    /* Even cards: push text to the right side */
+    .project-card:nth-child(even) .project-content {
+      margin-left: auto;
+      text-align: right;            /* right-align text for even cards */
+    }
+    /* Right-align tags on even cards too */
+    .project-card:nth-child(even) .project-tags {
+      justify-content: flex-end;
+    }
+    /* Right-align actions on even cards */
+    .project-card:nth-child(even) .project-actions {
+      justify-content: flex-end;
+    }
+
+    .project-eyebrow {
+      font-family: var(--mono); font-size: .7rem;
+      letter-spacing: .15em; text-transform: uppercase;
+      color: var(--blue-light);
+    }
+    .project-title {
+      font-size: clamp(1.15rem, 2.2vw, 1.5rem);
+      font-weight: 700; line-height: 1.2;
+    }
+    .project-tags { display: flex; flex-wrap: wrap; gap: .4rem; }
+    .project-desc {
+      font-size: .88rem; color: var(--muted); line-height: 1.65;
+    }
+    .project-desc ul { padding-left: 1.1rem; }
+    .project-desc li { margin-bottom: .25rem; }
+
+    /* For even cards, flip the list bullets to the right */
+    .project-card:nth-child(even) .project-desc ul {
+      padding-left: 0; padding-right: 1.1rem;
+      list-style-position: inside;
+    }
+
+    .project-actions { display: flex; gap: .7rem; flex-wrap: wrap; margin-top: .4rem; }
+    .btn-report {
+      display: inline-flex; align-items: center; gap: .45rem;
+      font-family: var(--mono); font-size: .74rem;
+      color: var(--blue-light); border: 1px solid var(--blue);
+      padding: .4rem .95rem; border-radius: 4px;
+      text-decoration: none; transition: background .2s, color .2s;
+      backdrop-filter: blur(4px);
+      background: rgba(15,31,54,0.5);
+    }
+    .btn-report:hover { background: var(--blue); color: white; }
+
+    /* Placeholder when no image is provided */
+    .project-card.no-image {
+      background: var(--navy-mid);
+    }
+    .project-card.no-image .project-overlay {
+      display: none;
+    }
+
+    /* ── LANGUAGES ── */
+    .lang-grid {
+      display: flex; flex-direction: column; gap: 1rem;
+      max-width: 600px;
+    }
+    .lang-card {
+      display: grid;
+      grid-template-columns: 2rem 1fr 180px;
+      align-items: center;
+      gap: 1rem;
+      background: var(--navy-mid);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: .9rem 1.3rem;
+      transition: border-color .2s;
+    }
+    .lang-card:hover { border-color: var(--blue); }
+    .lang-flag { font-size: 1.4rem; line-height: 1; }
+    .lang-info { display: flex; flex-direction: column; gap: .1rem; }
+    .lang-name { font-weight: 600; font-size: .95rem; }
+    .lang-level { font-family: var(--mono); font-size: .7rem; color: var(--muted); letter-spacing: .04em; }
+    .lang-bar {
+      height: 5px; border-radius: 99px;
+      background: var(--border); overflow: hidden;
+    }
+    .lang-fill {
+      height: 100%; border-radius: 99px;
+      background: var(--blue-light);
+      transition: width .6s ease;
+    }
+    @media (max-width: 500px) {
+      .lang-card { grid-template-columns: 2rem 1fr; }
+      .lang-bar { display: none; }
+    }
+
+        /* ── BÉNÉVOLAT ── */
+        .benevolat-list {
+      display: flex; flex-direction: column; gap: 3.5rem;
+    }
+    .benevolat-item {}
+    .benevolat-header {
+      display: flex; align-items: baseline; gap: 1rem;
+      margin-bottom: .5rem; flex-wrap: wrap;
+    }
+    .benevolat-title {
+      font-size: 1.15rem; font-weight: 700;
+    }
+    .benevolat-meta {
+      font-family: var(--mono); font-size: .72rem;
+      color: var(--blue-light); letter-spacing: .06em;
+    }
+    .benevolat-desc {
+      font-size: .9rem; color: var(--muted);
+      line-height: 1.65; max-width: 680px;
+      margin-bottom: 1.2rem;
+    }
+    .benevolat-photos {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      max-width: 6800px;
+    }
+    .benevolat-photo {
+      aspect-ratio: 4/3;
+      border-radius: 8px; overflow: hidden;
+      border: 1px solid var(--border);
+      background: var(--navy-mid);
+    }
+    .benevolat-photo img {
+      width: 100%; height: 100%;
+      object-fit: cover; display: block;
+      transition: transform .4s;
+    }
+    .benevolat-photo:hover img { transform: scale(1.05); }
+    .benevolat-photo-placeholder {
+      width: 100%; height: 100%;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center; gap: .4rem;
+      color: var(--border); font-family: var(--mono);
+      font-size: .7rem; text-align: center; padding: 1rem;
+    }
+    .benevolat-photo-placeholder span:first-child { font-size: 1.8rem; opacity: .3; }
+    @media (max-width: 500px) {
+      .benevolat-photos { grid-template-columns: 1fr; }
+    }
+
+    /* ── ABOUT ── */
+    .soft-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.1rem;
+    }
+    .soft-card {
+      background: var(--navy-mid); border: 1px solid var(--border);
+      border-radius: 8px; padding: 1.3rem 1.5rem;
+    }
+    .soft-icon { font-size: 1.3rem; margin-bottom: .5rem; }
+    .soft-card h3 { font-size: .92rem; font-weight: 600; margin-bottom: .35rem; }
+    .soft-card p { font-size: .83rem; color: var(--muted); line-height: 1.5; }
+
+    /* ── CONTACT ── */
+    .contact-links { display: flex; flex-direction: column; gap: .8rem; max-width: 460px; }
+    .contact-link {
+      display: flex; align-items: center; gap: 1rem;
+      font-family: var(--mono); font-size: .88rem; color: var(--text);
+      text-decoration: none; padding: .9rem 1.3rem;
+      border: 1px solid var(--border); border-radius: 6px;
+      background: var(--navy-mid); transition: border-color .2s, color .2s;
+    }
+    .contact-link:hover { border-color: var(--blue-light); color: var(--blue-light); }
+
+    /* ── FOOTER ── */
+    footer {
+      max-width: 1100px; margin: 0 auto;
+      padding: 1.8rem 2.5rem;
+      border-top: 1px solid var(--border);
+      display: flex; justify-content: space-between;
+      align-items: center; flex-wrap: wrap; gap: 1rem;
+    }
+    footer p { font-family: var(--mono); font-size: .7rem; color: var(--muted); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .project-card { min-height: 0; }
+      .project-card:nth-child(odd) .project-overlay,
+      .project-card:nth-child(even) .project-overlay {
+        background: rgba(9,18,33,0.88);  /* flat dark on mobile — no side gradient */
+      }
+      .project-content { max-width: 100%; padding: 2rem 1.4rem; }
+      .project-card:nth-child(even) .project-content {
+        margin-left: 0; text-align: left;
+      }
+      .project-card:nth-child(even) .project-tags,
+      .project-card:nth-child(even) .project-actions { justify-content: flex-start; }
+      .project-card:nth-child(even) .project-desc ul {
+        padding-left: 1.1rem; padding-right: 0; list-style-position: outside;
+      }
+      .nav-links { display: none; }
+      section, #hero { padding-left: 1.2rem; padding-right: 1.2rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#hero" class="nav-logo">AB//</a>
+  <ul class="nav-links">
+    <li><a href="#skills">Compétences</a></li>
+    <li><a href="#projects">Projets</a></li>
+    <li><a href="#benevolat">bénévolat</a></li>
+    <li><a href="#languages">Langues</a></li>
+    <li><a href="#about">Profil</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="pdfs/CV _Alternance.pdf" class="nav-cv" target="_blank">CV →</a>
+</nav>
+
+<!-- HERO -->
+<section id="hero" style="border-top:none;">
+  <p class="hero-eyebrow">// Recherche d'alternance 2026</p>
+  <h1 class="hero-name">Abdelouahab<br><em>BELARBI</em></h1>
+  <p class="hero-sub">Robotique · Automatique · Mécatronique<br>Master ARMAC à l'Université Marie et Louis Pasteur (Advanced Robotics, Mecatronics and Automatic Control).</p>
+  <div class="hero-meta">
+    <span>France</span>
+    <span>Disponible sept. 2026 · 24 mois</span>
+    <span>Français / Anglais / Arabe C2</span>
+  </div>
+  <div class="hero-ctas">
+    <a href="#projects" class="btn-primary">Voir mes projets</a>
+    <a href="#contact" class="btn-secondary">Me contacter</a>
+  </div>
+  <img src="images/pfp.jpg" alt="Abdelouahab BELARBI" class="hero-photo">
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <p class="section-label">// Logiciels et Compétences</p>
+  <div class="skills-grid">
+    <div class="skill-group">
+      <h3>Langages</h3>
+      <div class="tags">
+        <span class="tag">C</span><span class="tag">C++</span>
+        <span class="tag">Python</span><span class="tag">MATLAB</span>
+        <span class="tag">VHDL</span><span class="tag">ST</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <h3>Embarqué & FPGA</h3>
+      <div class="tags">
+        <span class="tag">Atmega32U4</span><span class="tag">FPGA</span>
+        <span class="tag">LabVIEW</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <h3>Automatique</h3>
+      <div class="tags">
+        <span class="tag">PID</span><span class="tag">Simulink</span>
+        <span class="tag">Contrôle Expert</span><span class="tag">Schneider</span>
+        <span class="tag">Zelio Logic</span><span class="tag">IFM</span><span class="tag">CODESYS</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <h3>Électronique</h3>
+      <div class="tags">
+        <span class="tag">Conception PCB</span><span class="tag">Routage</span>
+        <span class="tag">KiCad</span><span class="tag">LTspice</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <h3>Web</h3>
+      <div class="tags">
+        <span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <h3>Outils</h3>
+      <div class="tags">
+        <span class="tag">Git</span><span class="tag">GitHub</span>
+        <span class="tag">Linux</span><span class="tag">VS Code</span><span class="tag">LaTeX</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     PROJECTS
+     Each card:
+       - background-image set inline → your photo fills the whole card
+       - gradient fades the image on the text side so text is readable
+       - odd  → text LEFT,  image bleeds RIGHT
+       - even → text RIGHT, image bleeds LEFT
+       - "Compte-rendu" button appears directly under the description
+         Leave href="#" until you have the real PDF
+     ══════════════════════════════════════════ -->
+<section id="projects">
+  <p class="section-label">// Expériences & projets</p>
+ 
+
+  <!-- ─────────────────────────────
+       CARD 1  —  text LEFT  (odd)
+       Replace the background-image url with your photo.
+       If you have no photo yet, add class="no-image" to the div.
+  ───────────────────────────────── -->
+  <div class="project-card"
+       style="background-image: url('images/MP.jpg'); background-size: cover; background-position: LEFT;">
+    <div class="project-bg"></div>
+    <div class="project-overlay"></div>
+    <div class="project-content">
+      <p class="project-eyebrow">Stage · 3 mois · 2026</p>
+      <h3 class="project-title">Développement de systèmes Automatisés — ANDROS</h3>
+      <div class="project-tags tags">
+        <span class="tag">Contrôle Expert</span>
+        <span class="tag">PID</span>
+        <span class="tag">Zelio Logic</span>
+        <span class="tag">IFM</span>
+      </div>
+      <div class="project-desc">
+        <ul>
+          <li>Conception d'un système automatisé de rinçage de convoyeurs industriels.</li>
+          <li>Réglage des paramètres PID et validation par tests approfondis.</li>
+          <li>Programmation de modules Schneider et systèmes de sécurité IFM.</li>
+        </ul>
+      </div>
+      <!-- Compte-rendu button — replace href with real PDF path when ready -->
+      <div class="project-actions">
+        <a href="pdfs/lettre reco.pdf" class="btn-report" target="_blank">
+          📄 Lettre de recommandation
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─────────────────────────────
+       CARD 2  —  text RIGHT  (even)
+  ───────────────────────────────── -->
+  <div class="project-card"
+       style="background-image: url('images/generator\ with\ GPS.jpg'); background-size: cover; background-position: bottom;">
+    <div class="project-bg"></div>
+    <div class="project-overlay"></div>
+    <div class="project-content">
+      <p class="project-eyebrow">Projet · 3 mois · 2026</p>
+      <h3 class="project-title">Horloge haute précision sur référence GPS</h3>
+      <div class="project-tags tags">
+        <span class="tag">Atmega32U4</span>
+        <span class="tag">KiCad</span>
+        <span class="tag">Correcteur PI</span>
+        <span class="tag">C</span>
+      </div>
+      <div class="project-desc">
+        <ul>
+          <li>Conception et routage complet d'une carte électronique à base d'Atmega32U4.</li>
+          <li>Asservissement numérique PI pour corriger la dérive thermique d'un quartz.</li>
+        </ul>
+      </div>
+      <div class="project-actions">
+        <a href="pdfs/RAPPORT_PROJET_ATCE.pdf" class="btn-report" target="_blank">
+          📄 Compte-rendu PDF
+        </a>
+        <a href="https://youtu.be/LulcWuCBk7g" class="btn-report" target="_blank">
+          ▶ Voir la démo
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─────────────────────────────
+       CARD 3  —  text LEFT  (odd)
+  ───────────────────────────────── -->
+  <div class="project-card"
+       style="background-image: url('images/GPIO.jpg'); background-size: cover; background-position: left;">
+    <div class="project-bg"></div>
+    <div class="project-overlay"></div>
+    <div class="project-content">
+      <p class="project-eyebrow">Projet · 3 mois · 2026</p>
+      <h3 class="project-title">Système de mesure et commande sur FPGA</h3>
+      <div class="project-tags tags">
+        <span class="tag">VHDL</span>
+        <span class="tag">FPGA</span>
+        <span class="tag">Ultrason</span>
+        <span class="tag">Moteur pas-à-pas</span>
+      </div>
+      <div class="project-desc">
+        <ul>
+          <li>Programme « porte » couplant un capteur ultrason et un moteur pas à pas.</li>
+          <li>Portage du système sur plusieurs cartes FPGA différentes.</li>
+        </ul>
+      </div>
+      <div class="project-actions">
+        <a href="pdfs/FPGA.pdf" class="btn-report" target="_blank">
+          📄 Compte-rendu PDF
+        </a>
+        <a href="https://youtu.be/EU9gMiUTjO4" class="btn-report" target="_blank">
+          ▶ Voir la démo
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─────────────────────────────
+       CARD 4  —  text RIGHT  (even)
+  ───────────────────────────────── -->
+  <div class="project-card"
+       style="background-image: url('images/Feedback\ PID7.jpg'); background-size: cover; background-position: center;">
+    <div class="project-bg"></div>
+    <div class="project-overlay"></div>
+    <div class="project-content">
+      <p class="project-eyebrow">Projet · 2 mois · 2025</p>
+      <h3 class="project-title">Contrôle-commande moteur Feedback — analogique</h3>
+      <div class="project-tags tags">
+        <span class="tag">Simulink</span>
+        <span class="tag">MATLAB</span>
+        <span class="tag">Boucle fermée</span>
+      </div>
+      <div class="project-desc">
+        <ul>
+          <li>Modélisation et simulation d'un contrôleur sur Simulink.</li>
+          <li>Optimisation du système de régulation en boucle fermée.</li>
+        </ul>
+      </div>
+      <div class="project-actions">
+        <a href="pdfs/CR2_CSC3.pdf" class="btn-report" target="_blank">
+          📄 Compte-rendu PDF
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─────────────────────────────
+       CARD 5  —  text LEFT  (odd)
+       No image yet → add class="no-image" and remove the background-image style
+       to show a plain navy background instead of a broken image.
+       Remove no-image and add your style="background-image:..." when ready.
+  ───────────────────────────────── -->
+  <div class="project-card"
+    style="background-image: url('images/cooler\ cinema.jpg'); background-size: cover; background-position: center;">
+    <div class="project-overlay"></div>
+    <div class="project-content">
+      <p class="project-eyebrow">Projet · 2 mois · 2025</p>
+      <h3 class="project-title">Refroidisseur automatisé</h3>
+      <div class="project-tags tags">
+        <span class="tag">LabVIEW</span>
+        <span class="tag">Acquisition</span>
+        <span class="tag">Instrumentation</span>
+      </div>
+      <div class="project-desc">
+        <ul>
+          <li>Commande d'un signal analogique/numérique via carte d'acquisition sous LabVIEW.</li>
+          <li>Mise en pratique des principes d'instrumentation et de mesure.</li>
+        </ul>
+      </div>
+      <div class="project-actions">
+        <a href="pdfs/TP_instrumentation.pdf" class="btn-report" target="_blank">
+          📄 Compte-rendu PDF
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       HOW TO ADD A NEW PROJECT — copy this block:
+
+  <div class="project-card"
+       style="background-image: url('images/YOUR-IMAGE.jpg'); background-size: cover; background-position: center;">
+    <div class="project-bg"></div>
+    <div class="project-overlay"></div>
+    <div class="project-content">
+      <p class="project-eyebrow">Projet · X mois · 20XX</p>
+      <h3 class="project-title">Titre du projet</h3>
+      <div class="project-tags tags">
+        <span class="tag">Outil 1</span>
+        <span class="tag">Outil 2</span>
+      </div>
+      <div class="project-desc">
+        <ul>
+          <li>Description ligne 1.</li>
+          <li>Description ligne 2.</li>
+        </ul>
+      </div>
+      <div class="project-actions">
+        <a href="rapports/votre-rapport.pdf" class="btn-report" target="_blank">
+          📄 Compte-rendu PDF
+        </a>
+      </div>
+    </div>
+  </div>
+
+       The card automatically alternates left/right based on its position.
+       No image yet? Replace the opening tag with:
+       <div class="project-card no-image">
+  ══════════════════════════════════════════ -->
+
+</section>
+
+<!-- BÉNÉVOLAT & ACTIVITÉS -->
+<section id="benevolat">
+  <p class="section-label">// Bénévolat & Activités</p>
+  <h2 class="section-title">Engagements & vie associative</h2>
+ 
+  <div class="benevolat-list">
+ 
+    <!-- ── ASTRA ── -->
+    <div class="benevolat-item">
+      <div class="benevolat-header">
+        <span class="benevolat-title">ASTRA — Association étudiante</span>
+        <span class="benevolat-meta">En cours · Besançon</span>
+      </div>
+      <p class="benevolat-desc">
+        Membre actif d'ASTRA, association étudiante orientée aérospatiale, robotique et entrepreneuriat. Participation aux ateliers techniques et hackathons organisés par le groupe — des projets concrets menés en équipe, de l'idée au prototype. <!-- Décris ici ta contribution : rôle, projets, événements organisés, etc. -->
+      </p>
+      <div class="benevolat-photos">
+        <div class="benevolat-photo">
+          <img src="images/Astra.jpg" alt="ASTRA"
+            onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="benevolat-photo-placeholder" style="display:none">
+            <span>🖼</span><span>astra-1.jpg</span>
+          </div>
+        </div>
+        <div class="benevolat-photo">
+          <img src="images/robodog.jpg" alt="ASTRA"
+            onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="benevolat-photo-placeholder" style="display:none">
+            <span>🖼</span><span>astra-2.jpg</span>
+          </div>
+        </div>
+        <div class="benevolat-photo">
+          <img src="images/astra small robot.jpg" alt="ASTRA"
+            onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="benevolat-photo-placeholder" style="display:none">
+            <span>🖼</span><span>astra-2.jpg</span>
+          </div>
+        </div>
+        <div class="benevolat-photo">
+          <img src="images/small robot.jpg" alt="ASTRA"
+            onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="benevolat-photo-placeholder" style="display:none">
+            <span>🖼</span><span>astra-2.jpg</span>
+          </div>
+        </div>
+      </div>
+    </div>
+ 
+    <!-- ── ESN ── -->
+    <div class="benevolat-item">
+      <div class="benevolat-header">
+        <span class="benevolat-title">Comité d'événementiel — Erasmus Student Network</span>
+        <span class="benevolat-meta">2 ans · 2025 · Besançon</span>
+      </div>
+      <p class="benevolat-desc">
+        Organisation et logistique d'événements pour les étudiants internationaux.
+        Aide à l'intégration et création de lien entre étudiants locaux et étrangers.
+      </p>
+      <div class="benevolat-photos">
+        <div class="benevolat-photo">
+          <img src="images/ESN meeting.jpg" alt="ESN"
+            onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="benevolat-photo-placeholder" style="display:none">
+            <span>🖼</span><span>esn-1.jpg</span>
+          </div>
+        </div>
+        <div class="benevolat-photo">
+          <img src="images/esn speach.png" alt="ESN"
+            onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="benevolat-photo-placeholder" style="display:none">
+            <span>🖼</span><span>esn-2.jpg</span>
+          </div>
+        </div>
+      </div>
+    </div>
+ 
+    <!-- ── FIPF ── -->
+    <div class="benevolat-item">
+      <div class="benevolat-header">
+        <span class="benevolat-title">Bénévole — Fédération Internationale des Professeurs de Français</span>
+        <span class="benevolat-meta">1 mois · 2025 · Besançon</span>
+      </div>
+      <p class="benevolat-desc">
+        Support informatique lors d'un événement international : configuration logicielle
+        et résolution de pannes techniques pour les intervenants.
+      </p>
+      <div class="benevolat-photos">
+        <div class="benevolat-photo">
+          <img src="images/fifp1.jpg" alt="FIPF"
+            onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="benevolat-photo-placeholder" style="display:none">
+            <span>🖼</span><span>fipf-1.jpg</span>
+          </div>
+        </div>
+        <div class="benevolat-photo">
+          <img src="images/fifp2.png" alt="FIPF"
+            onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="benevolat-photo-placeholder" style="display:none">
+            <span>🖼</span><span>fipf-2.jpg</span>
+          </div>
+        </div>
+      </div>
+    </div>
+ 
+    <!-- ── COP1 ── -->
+    <div class="benevolat-item">
+      <div class="benevolat-header">
+        <span class="benevolat-title">Bénévole — COP1 — Distibutions alimentaires pour les étudiants</span>
+        <span class="benevolat-meta">En cours · Besançon</span>
+      </div>
+      <p class="benevolat-desc">
+        Participation aux distributions alimentaires, offrant un soutien concret aux étudiants en difficulté.
+      </p>
+      <div class="benevolat-photos">
+        <div class="benevolat-photo">
+          <img src="images/cop1.png" alt="ANIT"
+            onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="benevolat-photo-placeholder" style="display:none">
+            <span>🖼</span><span>anit-1.jpg</span>
+          </div>
+        </div>
+        <div class="benevolat-photo">
+          <img src="images/cop2.png" alt="ANIT"
+            onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="benevolat-photo-placeholder" style="display:none">
+            <span>🖼</span><span>anit-2.jpg</span>
+          </div>
+        </div>
+      </div>
+    </div>
+ 
+    <!-- ══════════════════════════════
+         TO ADD A NEW ACTIVITY — copy this block:
+ 
+    <div class="benevolat-item">
+      <div class="benevolat-header">
+        <span class="benevolat-title">Nom de l'activité</span>
+        <span class="benevolat-meta">Durée · Année · Lieu</span>
+      </div>
+      <p class="benevolat-desc">
+        Description courte de ta contribution.
+      </p>
+      <div class="benevolat-photos">
+        <div class="benevolat-photo">
+          <img src="images/nom-1.jpg" alt=""
+            onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="benevolat-photo-placeholder" style="display:none">
+            <span>🖼</span><span>nom-1.jpg</span>
+          </div>
+        </div>
+        <div class="benevolat-photo">
+          <img src="images/nom-2.jpg" alt=""
+            onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="benevolat-photo-placeholder" style="display:none">
+            <span>🖼</span><span>nom-2.jpg</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    ══════════════════════════════ -->
+ 
+  </div>
+</section>
+ 
+
+<!-- LANGUAGES -->
+<section id="languages">
+  <p class="section-label">// Langues</p>
+  <div class="lang-grid">
+
+    <div class="lang-card">
+      <div class="lang-flag">🇫🇷</div>
+      <div class="lang-info">
+        <span class="lang-name">Français</span>
+        <span class="lang-level">C2 — Langue maternelle</span>
+      </div>
+      <div class="lang-bar"><div class="lang-fill" style="width:100%"></div></div>
+    </div>
+
+    <div class="lang-card">
+      <div class="lang-flag">🇬🇧</div>
+      <div class="lang-info">
+        <span class="lang-name">Anglais</span>
+        <span class="lang-level">C2 — Courant</span>
+      </div>
+      <div class="lang-bar"><div class="lang-fill" style="width:100%"></div></div>
+    </div>
+
+    <div class="lang-card">
+      <div class="lang-flag">🇩🇿</div>
+      <div class="lang-info">
+        <span class="lang-name">Arabe</span>
+        <span class="lang-level">C2 — Langue maternelle</span>
+      </div>
+      <div class="lang-bar"><div class="lang-fill" style="width:100%"></div></div>
+    </div>
+
+    <div class="lang-card">
+      <div class="lang-flag">🇪🇸</div>
+      <div class="lang-info">
+        <span class="lang-name">Espagnol</span>
+        <span class="lang-level">Notions de base</span>
+      </div>
+      <div class="lang-bar"><div class="lang-fill" style="width:18%"></div></div>
+    </div>
+
+    <div class="lang-card">
+      <div class="lang-flag">🇯🇵</div>
+      <div class="lang-info">
+        <span class="lang-name">Japonais</span>
+        <span class="lang-level">Notions de base</span>
+      </div>
+      <div class="lang-bar"><div class="lang-fill" style="width:18%"></div></div>
+    </div>
+
+  </div>
+</section>
+
+
+
+<!-- ABOUT -->
+<section id="about">
+  <p class="section-label">// Profil</p>
+  <h2 class="section-title">Au-delà du technique</h2>
+  <div class="soft-grid">
+    <div class="soft-card">
+      <div class="soft-icon">🎷</div>
+      <h3>Discipline & précision</h3>
+      <p>Saxophoniste et karatéka 2ème dan — la rigueur de ces pratiques se retrouve directement dans mon approche de l'ingénierie.</p>
+    </div>
+    <div class="soft-card">
+      <div class="soft-icon">🌍</div>
+      <h3>Multilinguisme</h3>
+      <p>Français, Anglais, Arabe — niveau C2 dans les trois. Capable de travailler dans des contextes internationaux.</p>
+    </div>
+    <div class="soft-card">
+      <div class="soft-icon">🤝</div>
+      <h3>Engagement associatif</h3>
+      <p>2 ans à l'Erasmus Student Network, bénévole auprès d'enfants trisomiques — j'apporte autant d'attention aux personnes qu'aux systèmes.</p>
+    </div>
+    <div class="soft-card">
+      <div class="soft-icon">⚡</div>
+      <h3>Polyvalence technique</h3>
+      <p>Du VHDL au Python, du PCB à l'automate industriel — je m'adapte rapidement à de nouveaux outils et environnements.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <p class="section-label">// Contact</p>
+ 
+  <p style="color:var(--muted); max-width:480px; margin-bottom:2rem; font-size:.92rem;">
+    
+  </p>
+  <div class="contact-links">
+    <a href="mailto:Belarbiabdelouahab88@gmail.com" class="contact-link">
+      <span>✉</span> Belarbiabdelouahab88@gmail.com
+    </a>
+    <a href="tel:0758152445" class="contact-link">
+      <span>📱</span> 07 58 15 24 45
+    </a>
+    <a href="https://github.com/belarbiabdelouahab88-afk" target="_blank" class="contact-link">
+      <span>⌥</span> GitHub
+    </a>
+    <a href="https://www.linkedin.com/in/abdelouahab-belarbi-57b76134b/?skipRedirect=true" target="_blank" class="contact-link">
+      <span>⌥</span> Linkedin
+    </a>
+    <a href="pdfs/CV _Alternance.pdf" target="_blank" class="contact-link">
+      <span>📄</span> Télécharger mon CV
+    </a>
+  </div>
+</section>
+
+<footer>
+  <p>© Abdelouahab BELARBI 2026</p>
+  <p>Master Robotique & Mécatronique</p>
+</footer>
+
+</body>
+</html>
