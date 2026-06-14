@@ -117,15 +117,15 @@
   transform: translateY(-50%);
   width: 300px;
   height: 300px;
-  border-radius: 50%;           /* makes it circular */
-  object-fit: cover;            /* crops the image to fill the circle */
-  object-position: center top;  /* shows the top of the image — good for portraits */
+  border-radius: 50%;           
+  object-fit: cover;            
+  object-position: center top;  
   border: 3px solid var(--blue);
   box-shadow: 0 0 40px rgba(46,109,180,0.3);
 }
 
 @media (max-width: 768px) {
-  .hero-photo { display: none; }  /* hides on mobile so it doesn't overlap text */
+  .hero-photo { display: none; }  
 }
 
 
@@ -167,12 +167,7 @@
     }
     .tag:hover { border-color: var(--blue-light); color: var(--blue-light); }
 
-    /* ══════════════════════════════════════════
-       PROJECT CARD
-       Full-width card with a background image
-       that sits behind the text content.
-       Alternates: text-left / text-right
-    ══════════════════════════════════════════ */
+
     .project-card {
       position: relative;
       border-radius: 14px;
@@ -186,20 +181,19 @@
     }
     .project-card:hover { border-color: var(--blue); }
 
-    /* The background image — covers the whole card */
+   
     .project-bg {
       position: absolute;
-      inset: 0;                      /* top:0 right:0 bottom:0 left:0 */
+      inset: 0;                   
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
       transition: transform .6s ease;
-      /* Replaced by inline style: background-image: url(...) */
+    
     }
     .project-card:hover .project-bg { transform: scale(1.04); }
 
-    /* Dark gradient overlay so text stays readable over any image */
-    /* Odd cards: gradient goes left (dark) → right (transparent) */
+
     .project-card:nth-child(odd) .project-overlay {
       position: absolute; inset: 0;
       background: linear-gradient(
@@ -210,7 +204,7 @@
         rgba(9,18,33,0.05) 100%
       );
     }
-    /* Even cards: gradient goes right (dark) → left (transparent) */
+    /* Even cards: */
     .project-card:nth-child(even) .project-overlay {
       position: absolute; inset: 0;
       background: linear-gradient(
@@ -222,27 +216,24 @@
       );
     }
 
-    /* The text content block — sits on top of overlay */
+    
     .project-content {
-      position: relative;           /* above the overlay */
+      position: relative;          
       z-index: 1;
       padding: 3rem 3.2rem;
-      max-width: 520px;             /* keep text from spreading across full width */
+      max-width: 520px;             
       display: flex;
       flex-direction: column;
       justify-content: center;
       gap: .7rem;
     }
-    /* Even cards: push text to the right side */
     .project-card:nth-child(even) .project-content {
       margin-left: auto;
-      text-align: right;            /* right-align text for even cards */
+      text-align: right;       
     }
-    /* Right-align tags on even cards too */
     .project-card:nth-child(even) .project-tags {
       justify-content: flex-end;
     }
-    /* Right-align actions on even cards */
     .project-card:nth-child(even) .project-actions {
       justify-content: flex-end;
     }
@@ -263,7 +254,6 @@
     .project-desc ul { padding-left: 1.1rem; }
     .project-desc li { margin-bottom: .25rem; }
 
-    /* For even cards, flip the list bullets to the right */
     .project-card:nth-child(even) .project-desc ul {
       padding-left: 0; padding-right: 1.1rem;
       list-style-position: inside;
@@ -281,7 +271,6 @@
     }
     .btn-report:hover { background: var(--blue); color: white; }
 
-    /* Placeholder when no image is provided */
     .project-card.no-image {
       background: var(--navy-mid);
     }
@@ -514,25 +503,12 @@
   </div>
 </section>
 
-<!-- ══════════════════════════════════════════
-     PROJECTS
-     Each card:
-       - background-image set inline → your photo fills the whole card
-       - gradient fades the image on the text side so text is readable
-       - odd  → text LEFT,  image bleeds RIGHT
-       - even → text RIGHT, image bleeds LEFT
-       - "Compte-rendu" button appears directly under the description
-         Leave href="#" until you have the real PDF
-     ══════════════════════════════════════════ -->
+
 <section id="projects">
   <p class="section-label">// Expériences & projets</p>
  
 
-  <!-- ─────────────────────────────
-       CARD 1  —  text LEFT  (odd)
-       Replace the background-image url with your photo.
-       If you have no photo yet, add class="no-image" to the div.
-  ───────────────────────────────── -->
+
   <div class="project-card"
        style="background-image: url('images/MP.jpg'); background-size: cover; background-position: LEFT;">
     <div class="project-bg"></div>
@@ -553,7 +529,6 @@
           <li>Programmation de modules Schneider et systèmes de sécurité IFM.</li>
         </ul>
       </div>
-      <!-- Compte-rendu button — replace href with real PDF path when ready -->
       <div class="project-actions">
         <a href="pdfs/lettre reco.pdf" class="btn-report" target="_blank">
           📄 Lettre de recommandation
@@ -659,9 +634,6 @@
 
   <!-- ─────────────────────────────
        CARD 5  —  text LEFT  (odd)
-       No image yet → add class="no-image" and remove the background-image style
-       to show a plain navy background instead of a broken image.
-       Remove no-image and add your style="background-image:..." when ready.
   ───────────────────────────────── -->
   <div class="project-card"
     style="background-image: url('images/cooler\ cinema.jpg'); background-size: cover; background-position: center;">
@@ -687,40 +659,6 @@
       </div>
     </div>
   </div>
-
-  <!-- ══════════════════════════════════════════
-       HOW TO ADD A NEW PROJECT — copy this block:
-
-  <div class="project-card"
-       style="background-image: url('images/YOUR-IMAGE.jpg'); background-size: cover; background-position: center;">
-    <div class="project-bg"></div>
-    <div class="project-overlay"></div>
-    <div class="project-content">
-      <p class="project-eyebrow">Projet · X mois · 20XX</p>
-      <h3 class="project-title">Titre du projet</h3>
-      <div class="project-tags tags">
-        <span class="tag">Outil 1</span>
-        <span class="tag">Outil 2</span>
-      </div>
-      <div class="project-desc">
-        <ul>
-          <li>Description ligne 1.</li>
-          <li>Description ligne 2.</li>
-        </ul>
-      </div>
-      <div class="project-actions">
-        <a href="rapports/votre-rapport.pdf" class="btn-report" target="_blank">
-          📄 Compte-rendu PDF
-        </a>
-      </div>
-    </div>
-  </div>
-
-       The card automatically alternates left/right based on its position.
-       No image yet? Replace the opening tag with:
-       <div class="project-card no-image">
-  ══════════════════════════════════════════ -->
-
 </section>
 
 <!-- BÉNÉVOLAT & ACTIVITÉS -->
@@ -853,37 +791,6 @@
         </div>
       </div>
     </div>
- 
-    <!-- ══════════════════════════════
-         TO ADD A NEW ACTIVITY — copy this block:
- 
-    <div class="benevolat-item">
-      <div class="benevolat-header">
-        <span class="benevolat-title">Nom de l'activité</span>
-        <span class="benevolat-meta">Durée · Année · Lieu</span>
-      </div>
-      <p class="benevolat-desc">
-        Description courte de ta contribution.
-      </p>
-      <div class="benevolat-photos">
-        <div class="benevolat-photo">
-          <img src="images/nom-1.jpg" alt=""
-            onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-          <div class="benevolat-photo-placeholder" style="display:none">
-            <span>🖼</span><span>nom-1.jpg</span>
-          </div>
-        </div>
-        <div class="benevolat-photo">
-          <img src="images/nom-2.jpg" alt=""
-            onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-          <div class="benevolat-photo-placeholder" style="display:none">
-            <span>🖼</span><span>nom-2.jpg</span>
-          </div>
-        </div>
-      </div>
-    </div>
-    ══════════════════════════════ -->
- 
   </div>
 </section>
  
@@ -906,7 +813,7 @@
       <div class="lang-flag">🇬🇧</div>
       <div class="lang-info">
         <span class="lang-name">Anglais</span>
-        <span class="lang-level">C2 — Courant</span>
+        <span class="lang-level">C2 — Langue maternelle</span>
       </div>
       <div class="lang-bar"><div class="lang-fill" style="width:100%"></div></div>
     </div>
